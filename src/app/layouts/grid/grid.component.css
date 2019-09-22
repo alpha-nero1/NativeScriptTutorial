@@ -1,12 +1,12 @@
 /* Add mobile styles for the component here.  */
-FlexBoxLayout {
-  background-color: coral;
-  border-width: 1;
-}
-
-Label {
+/* Label {
   width: 50;
   height: 50;
+} */
+
+GridLayout {
+  border-width: 1;
+  border-color: aqua;
 }
 
 #i1 {

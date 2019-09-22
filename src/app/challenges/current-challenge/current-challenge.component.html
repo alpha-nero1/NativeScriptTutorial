@@ -1,5 +1,12 @@
-<StackLayout>
-  <TextField class="text-input" hint="Enter a challenge" [(ngModel)]="challengeDescription"></TextField>
-  <Button class="button" text="Set challenge" (tap)="onSetChallenge()"></Button>
-  <Label class="title" [text]="currentChallenge" style="font-size: 20"></Label>
-</StackLayout>
+<ListView
+  [items]="challenges"
+  (itemTap)="onItemTap($event)"
+  iosEsitmatedRowHeight="65">
+  <ng-template let-challenge="item" let-i="index">
+    <FlexBoxLayout flexDirection="row" justifyContent="space-between">
+      <Label [text]="i"></Label>
+      <Label [text]="challenge"></Label>
+      <Label text="Item content row 2"></Label>
+    </FlexBoxLayout>
+  </ng-template>
+</ListView>

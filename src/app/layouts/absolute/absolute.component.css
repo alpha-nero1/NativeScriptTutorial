@@ -1,12 +1,11 @@
-/* Add mobile styles for the component here.  */
-FlexBoxLayout {
-  background-color: coral;
-  border-width: 1;
-}
-
 Label {
   width: 50;
   height: 50;
+}
+
+AbsoluteLayout {
+  border-width: 1;
+  border-color: purple;
 }
 
 #i1 {

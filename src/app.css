@@ -11,18 +11,22 @@ refer to http://docs.nativescript.org/ui/theme.
 */
 @import '~nativescript-theme-core/css/core.light.css';
 
+FlexBoxLayout {
+  padding: 4;
+}
+
 .button {
-  background: #7c015d;
+  background: #006eff;
   border-width: 1;
-  border-color: #7c015d;
+  border-color: #006eff;
   color: white;
-  padding: 4 10;
+  padding: 10 10;
   border-radius: 20%;
   margin: 4 0;
 }
 
 .text-input {
-  border-color: #7c015d;
+  border-color: #006eff;
   border-bottom-width: 1px;
   padding: 2 2;
   margin: 2 2;

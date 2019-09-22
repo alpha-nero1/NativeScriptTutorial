@@ -1,5 +1,5 @@
 <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
-<StackLayout>
-  <ns-stack></ns-stack>
-  <ns-flexbox></ns-flexbox>
-</StackLayout>
+<FlexBoxLayout flexDirection="column">
+  <ns-challenge-edit (input)="onChallengeAdded($event)"></ns-challenge-edit>
+  <ns-current-challenge [challenges]="challenges"></ns-current-challenge>
+</FlexBoxLayout>
