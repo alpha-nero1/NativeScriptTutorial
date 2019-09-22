@@ -5,9 +5,10 @@ import { Component } from "@angular/core";
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
-  challenges = [];
+  challenge = '';
 
   onChallengeAdded(input) {
-    this.challenges.push(input);
+    this.challenge = input;
+    console.log(this.challenge)
   }
 }

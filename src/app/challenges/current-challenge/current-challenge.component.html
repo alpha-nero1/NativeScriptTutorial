@@ -1,12 +1,3 @@
-<ListView
-  [items]="challenges"
-  (itemTap)="onItemTap($event)"
-  iosEsitmatedRowHeight="65">
-  <ng-template let-challenge="item" let-i="index">
-    <FlexBoxLayout flexDirection="row" justifyContent="space-between">
-      <Label [text]="i"></Label>
-      <Label [text]="challenge"></Label>
-      <Label text="Item content row 2"></Label>
-    </FlexBoxLayout>
-  </ng-template>
-</ListView>
+<StackLayout>
+  <Label class="title" text="The current challenge" horizontalAlignment="center"></Label>
+</StackLayout>
