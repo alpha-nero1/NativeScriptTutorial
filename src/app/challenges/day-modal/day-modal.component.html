@@ -1,0 +1,5 @@
+<FlexBoxLayout>
+  <Label [text]="loadedDate | date"></Label>
+  <Button class="button" text="Completed" (tap)="onHandleInput('completed')"></Button>
+  <Button class="button" text="Failed" (tap)="onHandleInput('failed')"></Button>
+</FlexBoxLayout>

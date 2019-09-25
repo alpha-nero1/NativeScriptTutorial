@@ -1,3 +1,22 @@
-<StackLayout>
-  <Label class="title" text="The current challenge" horizontalAlignment="center"></Label>
-</StackLayout>
+<ns-action-bar title="Current challenge" [showBackButton]="false">
+  <!-- Transclusion! -->
+  <Actionitem
+    ios.position="right"
+    android.position="actionBar"
+    nsRouterLink="challenges/set"
+    pageTransition="slideLeft"
+  >
+    <Label text="Set"></Label>
+  </Actionitem>
+  <Actionitem
+    ios.position="right"
+    android.position="actionBar"
+    nsRouterLink="challenges/edit"
+    pageTransition="slideLeft"
+  >
+    <Label text="Edit"></Label>
+  </Actionitem>
+</ns-action-bar>
+<FlexBoxLayout flexDirection="column" justifyContent="center">
+  <Button class="button" text="Change status" (tap)="onChangeStatus()"></Button>
+</FlexBoxLayout>

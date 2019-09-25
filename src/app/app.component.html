@@ -1,1 +1,21 @@
-<page-router-outlet></page-router-outlet>
+<RadSideDrawer>
+  <FlexBoxLayout
+    tkDrawerContent="tkDrawerContent"
+    class="drawer"
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Button
+      text="Logout"
+      class="button"
+      nsRouterLink="/"
+      [clearHistory]="true"
+      (tap)="logout()"
+    ></Button>
+  </FlexBoxLayout>
+
+  <StackLayout tkMainContent="tkMainContent">
+    <page-router-outlet></page-router-outlet>
+  </StackLayout>
+</RadSideDrawer>

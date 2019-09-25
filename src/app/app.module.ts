@@ -3,41 +3,46 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { AppComponent } from "./app.component";
-import { CurrentChallengeComponent } from './challenges/current-challenge/current-challenge.component';
 import { StackComponent } from './layouts/stack/stack.component';
 import { FlexboxComponent } from './layouts/flexbox/flexbox.component';
 import { GridComponent } from './layouts/grid/grid.component';
 import { AbsoluteComponent } from './layouts/absolute/absolute.component';
-import { ChallengeEditComponent } from './challenges/challenge-edit/challenge-edit.component';
 import { AuthComponent } from './auth/auth.component';
-import { TodayComponent } from './challenges/today/today.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ActionBarComponent } from './shared/ui/action-bar/action-bar.component';
+import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
+import { DayModalComponent } from './challenges/day-modal/day-modal.component'
+import { RouterModule } from '@angular/router';
+import { ActionBarModule } from './shared/ui/action-bar/action-bar.module';
 
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
-
-// Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
-// import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
-
+/**
+ * @author Alessandro Alberga
+ * @description main app module.
+ */
 @NgModule({
     bootstrap: [
       AppComponent
     ],
     imports: [
+      RouterModule,
       AppRoutingModule,
+      ActionBarModule,
       NativeScriptFormsModule,
-      NativeScriptModule
+      NativeScriptModule,
+      NativeScriptUISideDrawerModule
+    ],
+    entryComponents: [
+      // To prepare modal for construction.
+      DayModalComponent
     ],
     declarations: [
       AppComponent,
-      CurrentChallengeComponent,
       StackComponent,
       FlexboxComponent,
       GridComponent,
       AbsoluteComponent,
-      ChallengeEditComponent,
       AuthComponent,
-      TodayComponent
+      DayModalComponent
     ],
     providers: [],
     schemas: [

@@ -15,6 +15,15 @@ FlexBoxLayout {
   padding: 4;
 }
 
+.drawer {
+  background: white;
+  padding: 20;
+}
+
+.text {
+  color: #006eff;
+}
+
 .button {
   background: #006eff;
   border-width: 1;
