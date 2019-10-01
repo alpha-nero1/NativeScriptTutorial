@@ -5,6 +5,9 @@ import { TodayComponent } from './today/today.component';
 import { ChallengeTabsComponent } from './challenge-tabs/challenge-tabs.component';
 import { CurrentChallengeComponent } from './current-challenge/current-challenge.component';
 import { ActionBarModule } from '../shared/ui/action-bar/action-bar.module';
+import { ChallengeActionsModule } from './challenge-actions/challenge-actions.module';
+import { NativeScriptFormsModule } from 'nativescript-angular';
+import { NoChallengeComponent } from './no-challenge/no-challenge.component';
 
 /**
  * @author Alessandro Alberga
@@ -14,12 +17,15 @@ import { ActionBarModule } from '../shared/ui/action-bar/action-bar.module';
   declarations: [
     ChallengeTabsComponent,
     CurrentChallengeComponent,
-    TodayComponent
+    TodayComponent,
+    NoChallengeComponent,
   ],
   imports: [
     ActionBarModule,
+    ChallengeActionsModule,
     ChallengesRoutingModule,
-    NativeScriptCommonModule
+    NativeScriptCommonModule,
+    NativeScriptFormsModule
   ],
   schemas: [
     // Disables angulars standard error checks

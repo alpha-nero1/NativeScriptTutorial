@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { ChallengeEditComponent } from './challenge-edit.component';
-import { NativeScriptRouterModule } from 'nativescript-angular';
+import { NativeScriptRouterModule, NativeScriptFormsModule } from 'nativescript-angular';
 import { ActionBarModule } from '../../shared/ui/action-bar/action-bar.module';
 
 /**
@@ -17,7 +17,8 @@ import { ActionBarModule } from '../../shared/ui/action-bar/action-bar.module';
     NativeScriptRouterModule.forChild([
       { path: '', component: ChallengeEditComponent }
     ]),
-    ActionBarModule
+    ActionBarModule,
+    NativeScriptFormsModule
   ],
   exports: [ChallengeEditComponent],
   schemas: [

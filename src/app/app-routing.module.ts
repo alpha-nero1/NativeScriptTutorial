@@ -17,6 +17,7 @@ const routes: Routes = [
  */
 @NgModule({
   imports: [
+    NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes)
   ],
   exports: [NativeScriptRouterModule]

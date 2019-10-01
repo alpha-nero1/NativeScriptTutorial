@@ -1,12 +1,8 @@
-<TabView
-  androidTabsPosition="bottom"
-  androidSelectedTabHighlightColor="#006eff"
-  selectedTabtextColor="#006eff"
->
-  <StackLayout *tabItem="{ title: 'Today' }">
+<TabView androidTabsPosition="bottom" class="fas" tabTextFontSize="20">
+  <StackLayout *tabItem="{ title: '&#xf5a2;' }">
     <page-router-outlet name="today"></page-router-outlet>
   </StackLayout>
-  <StackLayout *tabItem="{ title: 'Current challenge' }">
+  <StackLayout *tabItem="{ title: '&#xf073;' }">
     <page-router-outlet name="current"></page-router-outlet>
   </StackLayout>
 </TabView>

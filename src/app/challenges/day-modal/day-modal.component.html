@@ -1,5 +1,7 @@
-<FlexBoxLayout>
-  <Label [text]="loadedDate | date"></Label>
-  <Button class="button" text="Completed" (tap)="onHandleInput('completed')"></Button>
-  <Button class="button" text="Failed" (tap)="onHandleInput('failed')"></Button>
+<FlexBoxLayout flexDirection="column" justifyContent="center">
+  <Label class="h1" [text]="loadedDate | date"></Label>
+  <StackLayout class="dummy-space"></StackLayout>
+  <FlexBoxLayout>
+    <ns-challenge-actions [action]="action" (actionSelect)="onHandleInput($event)"></ns-challenge-actions>
+  </FlexBoxLayout>
 </FlexBoxLayout>

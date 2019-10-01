@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PageRoute } from 'nativescript-angular';
+import { PageRoute, RouterExtensions } from 'nativescript-angular';
 import { Subscription } from 'rxjs';
+import { Challenge } from '../challenge.model';
+import { ChallengesService } from '../challenges.service';
 
 /**
  * @author Alessandro Alberga
@@ -10,7 +12,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'ns-challenge-edit',
   templateUrl: './challenge-edit.component.html',
-  styleUrls: ['./challenge-edit.component.css']
+  styleUrls: ['./challenge-edit.component.scss']
 })
 export class ChallengeEditComponent implements OnInit, OnDestroy {
 
@@ -24,7 +26,17 @@ export class ChallengeEditComponent implements OnInit, OnDestroy {
    */
   private routeSubscription: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute, private pageRoute: PageRoute) { }
+  /**
+   * Init the form input.
+   */
+  public challengeInput = new Challenge('', '');
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private pageRoute: PageRoute,
+    private router: RouterExtensions,
+    private challengesService: ChallengesService
+  ) { }
 
   ngOnInit(): void {
     this.routeSubscription = this.pageRoute.activatedRoute
@@ -45,11 +57,20 @@ export class ChallengeEditComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Submission handler for challenge input.
+   */
+  public onSubmit(): void {
+    this.challengesService.createNewChallenge(
+      this.challengeInput.title,
+      this.challengeInput.description
+    );
+    this.router.backToPreviousPage();
+  }
+
   ngOnDestroy(): void {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
     }
   }
-
-
 }

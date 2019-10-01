@@ -2,16 +2,20 @@ import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectorR
 import { UIService } from './shared/ui/ui.service';
 import { Subscription } from 'rxjs';
 import { RadSideDrawerComponent } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
+import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 @Component({
-    selector: "ns-app",
-    templateUrl: "./app.component.html"
+  selector: "ns-app",
+  templateUrl: "./app.component.html",
+  moduleId: module.id
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(RadSideDrawerComponent, { static: true }) sideDrawer: RadSideDrawerComponent;
 
   private drawerListener: Subscription;
+
+  private drawer: RadSideDrawer;
 
   constructor(
     private uiService: UIService,
@@ -21,25 +25,25 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.drawerListener = this.uiService.drawerState.subscribe(() => {
-      if (this.sideDrawer) {
-        this.sideDrawer.sideDrawer.toggleDrawerState();
+      if (this.drawer) {
+        this.drawer.toggleDrawerState();
       }
     })
     this.uiService.setRootVCRef(this.viewContainerRef);
   }
 
   ngAfterViewInit(): void {
+    this.drawer = this.sideDrawer.sideDrawer;
     this.changeDetectionRef.detectChanges();
-    this.drawerListener = this.uiService.drawerState.subscribe(() => {
-      this.sideDrawer.sideDrawer.toggleDrawerState();
-    })
   }
 
   public logout(): void {
-    this.sideDrawer.sideDrawer.toggleDrawerState();
+    this.uiService.toggleDrawer();
   }
 
   ngOnDestroy(): void {
-    this.drawerListener.unsubscribe()
+    if (this.drawerListener) {
+      this.drawerListener.unsubscribe()
+    }
   }
 }

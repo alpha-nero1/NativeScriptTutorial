@@ -9,11 +9,11 @@ import { GridComponent } from './layouts/grid/grid.component';
 import { AbsoluteComponent } from './layouts/absolute/absolute.component';
 import { AuthComponent } from './auth/auth.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ActionBarComponent } from './shared/ui/action-bar/action-bar.component';
 import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
 import { DayModalComponent } from './challenges/day-modal/day-modal.component'
-import { RouterModule } from '@angular/router';
 import { ActionBarModule } from './shared/ui/action-bar/action-bar.module';
+import { ChallengeActionsModule } from './challenges/challenge-actions/challenge-actions.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /**
  * @author Alessandro Alberga
@@ -24,12 +24,13 @@ import { ActionBarModule } from './shared/ui/action-bar/action-bar.module';
       AppComponent
     ],
     imports: [
-      RouterModule,
-      AppRoutingModule,
       ActionBarModule,
+      AppRoutingModule,
+      ChallengeActionsModule,
       NativeScriptFormsModule,
       NativeScriptModule,
-      NativeScriptUISideDrawerModule
+      NativeScriptUISideDrawerModule,
+      ReactiveFormsModule
     ],
     entryComponents: [
       // To prepare modal for construction.
@@ -44,7 +45,6 @@ import { ActionBarModule } from './shared/ui/action-bar/action-bar.module';
       AuthComponent,
       DayModalComponent
     ],
-    providers: [],
     schemas: [
       // Disables angulars standard error checks
       NO_ERRORS_SCHEMA

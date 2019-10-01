@@ -4,7 +4,6 @@ import { NativeScriptRouterModule } from 'nativescript-angular';
 import { ChallengeTabsComponent } from './challenge-tabs/challenge-tabs.component';
 import { TodayComponent } from './today/today.component';
 import { CurrentChallengeComponent } from './current-challenge/current-challenge.component';
-import { ChallengeEditComponent } from './challenge-edit/challenge-edit.component';
 
 const routes: Routes = [
     {
@@ -13,20 +12,24 @@ const routes: Routes = [
       children: [
         { path: 'today', component: TodayComponent, outlet: 'today' },
         { path: 'current', component: CurrentChallengeComponent, outlet: 'current' },
-    ]
+      ]
     },
     { path:
       ':mode',
       loadChildren: '~/app/challenges/challenge-edit/challenge-edit.module#ChallengeEditModule'
     },
-    { path: '',
+    {
+      path: '',
       redirectTo: '/challenges/tabs',
       pathMatch: 'full'
     }
 ];
 
 @NgModule({
-    imports: [NativeScriptRouterModule.forChild(routes)],
+    imports: [
+      NativeScriptRouterModule,
+      NativeScriptRouterModule.forChild(routes)
+    ],
     exports: [NativeScriptRouterModule]
 })
 export class ChallengesRoutingModule {}

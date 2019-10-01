@@ -32,6 +32,6 @@ export class UIService {
   }
 
   public toggleDrawer(): void {
-    this._drawerState.next()
+    this._drawerState.next(null)
   }
 }
