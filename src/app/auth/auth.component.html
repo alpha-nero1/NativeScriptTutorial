@@ -47,6 +47,7 @@
     >
     </Button>
     <Button
+      *ngIf="!isLoading"
       [isEnabled]="form.valid"
       width="150"
       [text]="isLogin ? 'Login' : 'Signup'"
@@ -54,4 +55,5 @@
       (tap)="onSignIn()"
     ></Button>
   </FlexBoxLayout>
+  <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
 </FlexBoxLayout>

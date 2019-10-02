@@ -4,6 +4,7 @@ import { PageRoute, RouterExtensions } from 'nativescript-angular';
 import { Subscription } from 'rxjs';
 import { Challenge } from '../challenge.model';
 import { ChallengesService } from '../challenges.service';
+import { take } from 'rxjs/operators';
 
 /**
  * @author Alessandro Alberga
@@ -54,6 +55,11 @@ export class ChallengeEditComponent implements OnInit, OnDestroy {
         } else {
           this.isEdit = (paramMap.get('mode') === 'edit');
         }
+        if (this.isEdit) {
+          this.challengesService.currentChallenge.pipe(take(1)).subscribe(challenge => {
+            this.challengeInput = challenge;
+          })
+        }
     })
   }
 
@@ -61,10 +67,17 @@ export class ChallengeEditComponent implements OnInit, OnDestroy {
    * Submission handler for challenge input.
    */
   public onSubmit(): void {
-    this.challengesService.createNewChallenge(
-      this.challengeInput.title,
-      this.challengeInput.description
-    );
+    if (this.isEdit) {
+      this.challengesService.updateChallenge(
+        this.challengeInput.title,
+        this.challengeInput.description
+      )
+    } else {
+      this.challengesService.createNewChallenge(
+        this.challengeInput.title,
+        this.challengeInput.description
+      );
+    }
     this.router.backToPreviousPage();
   }
 

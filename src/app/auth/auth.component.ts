@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TextField } from 'tns-core-modules/ui/text-field';
+import { AuthService } from './auth.service';
 
 /**
  * @author Alessandro Alberga
@@ -36,7 +37,12 @@ export class AuthComponent implements OnInit {
 
   isLogin = true;
 
-  constructor(private router: RouterExtensions) { }
+  isLoading = true;
+
+  constructor(
+    private router: RouterExtensions,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     // Configure the form.
@@ -76,7 +82,22 @@ export class AuthComponent implements OnInit {
     if (!this.form.valid) { return; }
     const username = this.form.get('username');
     const password = this.form.get('password');
-    this.router.navigate(['/challenges/'], { clearHistory: true });
     this.form.reset()
+    this.isLoading = true;
+    if (this.isLogin) {
+      this.authService.login(username.value, password.value).subscribe(this.loginToAppHandler, this.loginErrHandler)
+    } else {
+      this.authService.signUp(username.value, password.value).subscribe(this.loginToAppHandler, this.loginErrHandler)
+    }
+  }
+
+  private loginErrHandler = (err) => {
+    console.log(err)
+    this.isLoading = false;
+  }
+
+  private loginToAppHandler = () => {
+    this.router.navigate(['/challenges/'], { clearHistory: true });
+    this.isLoading = false;
   }
 }

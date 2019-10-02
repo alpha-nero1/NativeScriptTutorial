@@ -14,6 +14,7 @@ import { DayModalComponent } from './challenges/day-modal/day-modal.component'
 import { ActionBarModule } from './shared/ui/action-bar/action-bar.module';
 import { ChallengeActionsModule } from './challenges/challenge-actions/challenge-actions.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 
 /**
  * @author Alessandro Alberga
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       NativeScriptFormsModule,
       NativeScriptModule,
       NativeScriptUISideDrawerModule,
+      NativeScriptHttpClientModule,
       ReactiveFormsModule
     ],
     entryComponents: [
