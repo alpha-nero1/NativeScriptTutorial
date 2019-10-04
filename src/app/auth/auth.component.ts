@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit {
 
   isLogin = true;
 
-  isLoading = true;
+  isLoading = false;
 
   constructor(
     private router: RouterExtensions,

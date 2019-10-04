@@ -3,6 +3,8 @@ import { UIService } from './shared/ui/ui.service';
 import { Subscription } from 'rxjs';
 import { RadSideDrawerComponent } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { AuthService } from './auth/auth.service';
+import { RouterExtensions } from 'nativescript-angular';
 
 @Component({
   selector: "ns-app",
@@ -20,7 +22,9 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private uiService: UIService,
     private changeDetectionRef: ChangeDetectorRef,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private authService: AuthService,
+    private router: RouterExtensions
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     })
     this.uiService.setRootVCRef(this.viewContainerRef);
+    this.authService.autoLogin().subscribe();
   }
 
   ngAfterViewInit(): void {
@@ -39,6 +44,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public logout(): void {
     this.uiService.toggleDrawer();
+    this.authService.logout();
+    this.router.navigate(['/'], { clearHistory: true });
   }
 
   ngOnDestroy(): void {

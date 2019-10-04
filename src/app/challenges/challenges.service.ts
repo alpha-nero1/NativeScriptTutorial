@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Challenge } from './challenge.model';
 import { DayStatus } from './day.model';
-import { take, tap } from 'rxjs/operators';
+import { take, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { constants } from '../../constants';
+import { AuthService } from '../auth/auth.service';
 
 /**
  * @author Alessandro Alberga
@@ -22,25 +23,32 @@ export class ChallengesService {
    */
   private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   /**
    * Returns the created observable that will retrieve the challenge.
    */
   public fetchCurrentChallenge() {
-    return this.http.get(`${this.firebaseRestUrl}/challenge.json`)
-      .pipe(tap((res: any) => {
-        if (res) {
-          const loadedObject = new Challenge(
-            res.title,
-            res.description,
-            res.year,
-            res.month,
-            res._days
-          );
-          this._currentChallenge.next(loadedObject);
+    return this.authService.user.pipe(
+      take(1),
+      switchMap(currentUser => {
+        if (!currentUser || !currentUser.isAuthenticated) {
+          return of(false);
         }
-       }))
+        return this.http.get(`${this.firebaseRestUrl}/challenge.json?auth=${currentUser.token}`)
+          .pipe(tap((res: any) => {
+            if (res) {
+              const loadedObject = new Challenge(
+                res.title,
+                res.description,
+                res.year,
+                res.month,
+                res._days
+              );
+              this._currentChallenge.next(loadedObject);
+            }
+          }))
+      }))
   }
 
   /**
@@ -108,7 +116,12 @@ export class ChallengesService {
    * @param challenge challenge to save.
    */
   private saveToServer(challenge: Challenge) {
-    return this.http.put(`${this.firebaseRestUrl}/challenge.json`, challenge)
+    return this.authService.user.pipe(take(1), switchMap(currentUser => {
+      if (!currentUser || !currentUser.isAuthenticated) {
+        return;
+      }
+      return this.http.put(`${this.firebaseRestUrl}/challenge.json?auth=${currentUser.token}`, challenge)
+    }))
       .subscribe()
   }
 }
